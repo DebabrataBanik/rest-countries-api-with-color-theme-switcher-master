@@ -1,6 +1,12 @@
+import Header from "./components/Header"
+import Main from "./components/Main"
+
 const App = () => {
   return (
-    <div>App</div>
+    <div className="wrapper">
+      <Header />
+      <Main />
+    </div>
   )
 }
 

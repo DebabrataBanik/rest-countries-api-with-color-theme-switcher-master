@@ -6,5 +6,172 @@
   --color-grey-50: hsl(0, 0%, 99%);
 
   /* font-weights: 300, 600, 800 */
+  
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+  
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* line-height: 1.5; */
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
   font-family: "Nunito Sans", sans-serif;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1,h2,h3,h4,h5,h6 {
+  overflow-wrap: break-word;
+}
+
+p { text-wrap: pretty; }
+h1,h2,h3,h4,h5,h6 { text-wrap: balance; }
+
+#root, #__next {
+  isolation: isolate;
+}
+li{
+  list-style: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* mobile layout */
+
+.wrapper{
+  min-height: 100vh;
+  background-color: var(--color-blue-950);
+  color: white;
+}
+
+header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  background-color: var(--color-blue-900);
+  font-size: 14px;
+
+  & p{
+    font-weight: 600;
+  }
+}
+
+.toggle{
+  color: white;
+  border: none;
+  background-color: transparent;
+}
+
+main{
+  padding: 1rem;
+}
+
+.country-label{
+  display: block;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+input{
+  width: 100%;
+  background-color: var(--color-blue-900);
+  border: none;
+  padding: 0.8rem 0 0.8rem 3rem;
+  border-radius: 5px;
+  color: white;
+  outline: none;
+
+  &::placeholder{
+    color: hsla(0, 0%, 99%, 80%);
+    font-size: 14px;
+  }
+}
+
+.search-icon{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1rem;
+}
+
+.filter-label{
+  position: relative;
+}
+
+.down-icon{
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 1rem;
+}
+
+select, ::picker(select) {
+  appearance: base-select;
+}
+
+select::picker-icon{
+  display: none;
+}
+
+select{
+  cursor: pointer;
+  width: 12rem;
+  padding: 0.8rem 1rem;
+  background-color: var(--color-blue-900);
+  border: none;
+  color: var(--color-grey-50);
+  border-radius: 5px;
+  outline: none;
+  font-size: 14px;
+}
+
+::picker(select){
+  background-color: var(--color-blue-900);
+  border-radius: 5px;
+  margin-top: 5px;
+  border: none;
+  color: var(--color-grey-50);
+  padding: 0.5rem;
+}
+
+option{
+  padding: 5px;
+  padding-left: 1rem;
+  margin-block: 2px;
+  border-radius: 5px;
+
+  &:hover{
+    background-color: var(--color-blue-950);
+  }
+}
+
+option::checkmark{
+  display: none;
+}
+
+option:checked{
+  background-color: var(--color-blue-950);
 }
