@@ -1,11 +1,42 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
+import getRestCountries from "../api";
+import Countries from "./Countries";
+import getSortedData from "../util/getSortedData";
+import getFilteredData from "../util/getFilteredData";
 
 const Main = () => {
 
   const [countryName, setCountryName] = useState('')
-  const [filter, setFilter] = useState('')
+  const [filterRegion, setFilterRegion] = useState('')
+  const [data, setData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState('')
+
+  useEffect(() => {
+    
+    async function fetchData(){
+      setLoading(true)
+      setError('')
+      try {
+        const data = await getRestCountries()
+        const sortedData = getSortedData(data)
+        setData(sortedData)
+      } catch (error) {
+        setError(error.message)
+      } finally{
+        setLoading(false)
+      }
+    }
+    fetchData()
+  }, [])
+
+  function clearFilter(){
+    setFilterRegion('')
+  }
+
+  const displayCountriesData = getFilteredData(data, filterRegion)
 
   return (
     <main>
@@ -21,25 +52,46 @@ const Main = () => {
         <SearchIcon size={17} className="search-icon" />
       </label>
 
-      <label className="filter-label" htmlFor="filter">
-        <ChevronDown size={15} className="down-icon" />
-        <select 
-          name="filter" 
-          id="filter"
-          value={filter}
-          onChange={e => setFilter(e.target.value)}
-        >
-          <option value='' disabled hidden>Filter by Region</option>
-          <option value="africa">Africa</option>
-          <option value="america">America</option>
-          <option value="asia">Asia</option>
-          <option value="europe">Europe</option>
-          <option value="oceania">Oceania</option>
-        </select>
-      </label>
+      <div>
+        <label className="filter-label" htmlFor="filter">
+          <ChevronDown size={15} className="down-icon" />
+          <select 
+            name="filter" 
+            id="filter"
+            value={filterRegion}
+            onChange={e => setFilterRegion(e.target.value)}
+          >
+            <option value='' disabled hidden>Filter by Region</option>
+            <option value="africa">Africa</option>
+            <option value="america">America</option>
+            <option value="asia">Asia</option>
+            <option value="europe">Europe</option>
+            <option value="oceania">Oceania</option>
+          </select>
+        </label>
+        { 
+          filterRegion &&
+          <p className="clear"> 
+            <button onClick={clearFilter}> 
+            Clear filter
+            </button>
+          </p>
+        } 
+      </div>
 
-      <section>
-        {/* render country list */}
+      <section className="country-list-wrapper">
+        {error && <p className="error-state">{error}</p>}
+
+        {!error && loading && <p className="loading-state">Loading countries...</p>}
+
+        {
+          !error && !loading && (
+            displayCountriesData.length > 0 ?
+            <Countries data={displayCountriesData} />
+            :
+            <p className="empty-state">No countries found.</p>
+          )
+        }
       </section>
       
     </main>

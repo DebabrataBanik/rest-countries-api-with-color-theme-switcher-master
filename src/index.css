@@ -63,6 +63,7 @@ li{
   min-height: 100vh;
   background-color: var(--color-blue-950);
   color: white;
+  position: relative;
 }
 
 header{
@@ -120,6 +121,19 @@ input{
   position: relative;
 }
 
+.clear{
+  display: inline-block;
+  margin-left: 1rem;
+
+  & button{
+    background-color: transparent;
+    border: none;
+    color: var(--color-grey-50);
+    font-size: 14px;
+    cursor: pointer;
+  }
+}
+
 .down-icon{
   position: absolute;
   right: 0;
@@ -175,3 +189,64 @@ option::checkmark{
 option:checked{
   background-color: var(--color-blue-950);
 }
+
+.country-list-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-state, .error-state, .empty-state{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.list-container{
+  padding-block: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.country-card{
+  width: 250px;
+  overflow: hidden;
+  border-radius: 5px;
+  background-color: var(--color-blue-900);
+  transition: scale 0.3s;
+  box-shadow: 0 0 20px -15px black;
+
+  &:hover{
+    scale: 1.02;
+  }
+}
+
+.country-card img{
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.country-info{
+  padding: 1.5rem 1rem 2rem 1rem;
+}
+
+.country-info h1{
+  font-size: 16px;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.country-info p{
+  margin-block: 3px;
+  font-size: 14px;
+  font-weight: 600;
+
+  & span{
+    color: hsla(0, 0%, 99%, 80%);
+    font-weight: 300;
+  }
+}
+
