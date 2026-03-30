@@ -60,6 +60,7 @@ const Main = () => {
             id="filter"
             value={filterRegion}
             onChange={e => setFilterRegion(e.target.value)}
+            aria-label="Filter countries by region"
           >
             <option value='' disabled hidden>Filter by Region</option>
             <option value="africa">Africa</option>

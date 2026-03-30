@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <header>
-      <p>Where in the world?</p>
+      <h1>Where in the world?</h1>
       <button className="toggle">Toggle</button>
     </header>
   )
