@@ -141,6 +141,12 @@ input{
   top: 50%;
   transform: translateY(-50%);
   right: 1rem;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+}
+
+select:open + .down-icon{
+  transform: rotate(180deg) translateY(50%);
 }
 
 select, ::picker(select) {

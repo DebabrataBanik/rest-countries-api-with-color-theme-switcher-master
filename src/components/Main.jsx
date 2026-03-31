@@ -4,11 +4,11 @@ import { ChevronDown } from "lucide-react";
 import getRestCountries from "../api";
 import Countries from "./Countries";
 import getSortedData from "../util/getSortedData";
-import getFilteredData from "../util/getFilteredData";
+import getFilterandSearchData from "../util/getFilterandSearchData";
 
 const Main = () => {
 
-  const [countryName, setCountryName] = useState('')
+  const [inputSearch, setInputSearch] = useState('')
   const [filterRegion, setFilterRegion] = useState('')
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -36,7 +36,7 @@ const Main = () => {
     setFilterRegion('')
   }
 
-  const displayCountriesData = getFilteredData(data, filterRegion)
+  const displayCountriesData = getFilterandSearchData(data, filterRegion, inputSearch)
 
   return (
     <main>
@@ -46,15 +46,14 @@ const Main = () => {
           type="text" 
           name="country" 
           placeholder="Search for a country..."
-          value={countryName}
-          onChange={e => setCountryName(e.target.value)}
+          value={inputSearch}
+          onChange={e => setInputSearch(e.target.value)}
         />
         <SearchIcon size={17} className="search-icon" />
       </label>
 
       <div>
         <label className="filter-label" htmlFor="filter">
-          <ChevronDown size={15} className="down-icon" />
           <select 
             name="filter" 
             id="filter"
@@ -69,6 +68,7 @@ const Main = () => {
             <option value="europe">Europe</option>
             <option value="oceania">Oceania</option>
           </select>
+          <ChevronDown size={15} className="down-icon" />
         </label>
         { 
           filterRegion &&
