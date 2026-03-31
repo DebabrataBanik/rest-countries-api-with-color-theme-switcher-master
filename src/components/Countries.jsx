@@ -12,7 +12,13 @@ const Countries = ({data}) => {
           
           return (
             <article className="country-card" key={name}>
-              <img src={imageSrc} alt={alt} width={250} height={150} />
+              <img 
+                src={imageSrc} 
+                alt={alt} 
+                width={250} 
+                height={150} 
+                loading="lazy"
+              />
               <div className="country-info">
                 <h2>{name}</h2>
                 <p>Population: <span>{population}</span></p>

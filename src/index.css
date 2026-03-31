@@ -243,11 +243,12 @@ option:checked{
 
 .country-card img{
   max-height: 150px;
+  /* aspect-ratio: 1; */
   object-fit: cover;
 }
 
 .country-info{
-  padding: 1.5rem 1rem 2rem 1rem;
+  padding: 1.5rem 1rem 2rem 1.5rem;
 }
 
 .country-info h2{
