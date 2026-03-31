@@ -46,7 +46,7 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
   : data.name?.common;
   const currencies = data.currencies ? Object.values(data.currencies).map(cur => cur.name).join(', ') : 'N/A'
   const languages = data.languages ? Object.values(data.languages).join(', ') : 'N/A'
-  const tld = data.tld.join(', ') || 'N/A'
+  const tld = data.tld?.join(', ') || 'N/A'
 
   return (
     <div className="country-details-container">
