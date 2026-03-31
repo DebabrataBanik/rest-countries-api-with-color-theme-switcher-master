@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-import getRestCountries from "../api";
+import { getRestCountries } from "../api";
 import Countries from "./Countries";
 import getSortedData from "../util/getSortedData";
 import getFilterandSearchData from "../util/getFilterandSearchData";
