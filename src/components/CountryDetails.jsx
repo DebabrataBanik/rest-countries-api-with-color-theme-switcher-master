@@ -2,38 +2,43 @@ import { useState, useEffect } from "react"
 import { getCountryDetails } from "../api"
 import { ArrowLeft } from "lucide-react"
 
-const CountryDetails = () => {
+const CountryDetails = ({countryList, setCurrentPath}) => {
 
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+
   const path = window.location.pathname
   const id = path.split('/').pop()
 
   useEffect(() => {
-      
-      async function fetchData(){
-        setLoading(true)
-        setError('')
-        try {
-          const data = await getCountryDetails(id)
-          setData(data[0])
-        } catch (error) {
-          setError(error.message)
-        } finally{
-          setLoading(false)
-        }
+    async function fetchData(){
+      setLoading(true)
+      setError('')
+      try {
+        const data = await getCountryDetails(id)
+        setData(data[0])
+      } catch (error) {
+        setError(error.message)
+      } finally{
+        setLoading(false)
       }
-      fetchData()
-    }, [])
-
-    function handleBackNav(){
-      window.history.back()
     }
+    fetchData()
+  }, [id])
+
+  function handleClick(id){
+    setCurrentPath(`/country/${id}`)
+    window.history.pushState({}, '', id)
+  }
 
   if(error) return <p className="error-state">{error}</p>
-
   if(loading) return <p className="loading-state">Loading country details...</p>
+
+  const borderCodes = data.borders || []; 
+  const borderCountries = countryList.filter(item => 
+    borderCodes.includes(item.cca3)
+  );
 
   const name = data.name?.common || 'N/A'
   const nativeName = data.name?.nativeName 
@@ -45,7 +50,7 @@ const CountryDetails = () => {
 
   return (
     <div className="country-details-container">
-      <button onClick={handleBackNav} className="back-btn">
+      <button onClick={() => window.history.back()} className="back-btn">
         <ArrowLeft size={15} />
         Back
       </button>
@@ -87,8 +92,23 @@ const CountryDetails = () => {
           </strong>
         </div>
 
-        <div className="border-countries">
+        <div className="border-countries-container">
           <h3>Border Countries:</h3>
+          <div className="countries">
+            {borderCountries.length > 0 ? (
+              borderCountries.map(border => (
+                <button 
+                  key={border.cca3} 
+                  className="country-btn"
+                  onClick={() => handleClick(border.cca3)}
+                >
+                  {border.name.common}
+                </button>
+              ))
+            ) : (
+              <span>No bordering countries</span>
+            )}
+          </div>
         </div>
 
       </section>

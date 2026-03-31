@@ -55,7 +55,7 @@ const Main = () => {
       {
         currentPath.includes('country') 
         ?
-        <CountryDetails />
+        <CountryDetails countryList={data} setCurrentPath={setCurrentPath} />
         :
         <>
           <label className="country-label" htmlFor="country">
