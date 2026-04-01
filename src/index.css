@@ -131,6 +131,7 @@ input{
 
   &::placeholder{
     color: var(--text-main);
+    opacity: 0.5;
     font-size: 14px;
   }
 }
@@ -140,6 +141,7 @@ input{
   top: 50%;
   transform: translateY(-50%);
   left: 1rem;
+  opacity: 0.5;
 }
 
 .filter-label{
