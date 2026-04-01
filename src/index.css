@@ -3,10 +3,21 @@
   --color-blue-950: hsl(207, 26%, 17%);
   --color-grey-950: hsl(200, 15%, 8%);
   --color-grey-400: hsl(0, 0%, 50%);
-  --color-grey-50: hsl(0, 0%, 99%);
+  --color-grey-50: hsl(0, 0%, 98%);
+}
 
-  /* font-weights: 300, 600, 800 */
-  
+[data-theme='dark']{
+  --bg-page: var(--color-blue-950);
+  --bg-el: var(--color-blue-900);
+  --text-main: var(--color-grey-50);
+  --shadow: 0 0 20px #00000020;
+}
+
+[data-theme='light']{
+  --bg-page: var(--color-grey-50);
+  --bg-el: white;
+  --text-main: var(--color-blue-950);
+  --shadow: 0 0 10px #00000020;
 }
 
 *, *::before, *::after {
@@ -61,9 +72,10 @@ li{
 
 .wrapper{
   min-height: 100vh;
-  background-color: var(--color-blue-950);
-  color: white;
+  background-color: var(--bg-page);
+  color: var(--text-main);
   position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 header{
@@ -71,19 +83,30 @@ header{
   align-items: center;
   justify-content: space-between;
   padding: 2rem 1rem;
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
+  color: var(--text-main);
   font-size: 14px;
 
   & h1{
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 800;
   }
 }
 
 .toggle{
-  color: white;
+  cursor: pointer;
+  color: var(--text-main);
   border: none;
+  font-size: 14px;
+  font-weight: 600;
   background-color: transparent;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.filled{
+  fill: var(--text-main);
 }
 
 main{
@@ -98,15 +121,16 @@ main{
 
 input{
   width: 100%;
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   border: none;
   padding: 0.8rem 0 0.8rem 3rem;
   border-radius: 5px;
-  color: white;
+  color: var(--text-main);
   outline: none;
+  box-shadow: var(--shadow);
 
   &::placeholder{
-    color: hsla(0, 0%, 99%, 80%);
+    color: var(--text-main);
     font-size: 14px;
   }
 }
@@ -129,7 +153,7 @@ input{
   & button{
     background-color: transparent;
     border: none;
-    color: var(--color-grey-50);
+    color: var(--text-main);
     font-size: 14px;
     cursor: pointer;
   }
@@ -160,26 +184,27 @@ select{
   cursor: pointer;
   width: 12rem;
   padding: 0.8rem 1.5rem;
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   border: none;
-  color: var(--color-grey-50);
+  color: var(--text-main);
   border-radius: 5px;
   outline: none;
   font-size: 12px;
   font-weight: 600;
+  box-shadow: var(--shadow);
 
   &:focus-visible{
-    outline: 1px solid var(--color-grey-50);
+    outline: 1px solid var(--text-main);
     outline-offset: 2px;
   }
 }
 
 ::picker(select){
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   border-radius: 5px;
   margin-top: 5px;
   border: none;
-  color: var(--color-grey-50);
+  color: var(--text-main);
   padding: 0.5rem;
 }
 
@@ -190,12 +215,12 @@ option{
   border-radius: 5px;
 
   &:hover{
-    background-color: var(--color-blue-950);
+    background-color: var(--bg-page);
   }
 
   &:focus-visible{
-    outline: 1px solid var(--color-grey-50);
-    background-color: var(--color-blue-950);
+    outline: 1px solid var(--text-main);
+    background-color: var(--bg-page);
   }
 }
 
@@ -204,7 +229,7 @@ option::checkmark{
 }
 
 option:checked{
-  background-color: var(--color-blue-950);
+  background-color: var(--bg-page);
 }
 
 .country-list-wrapper{
@@ -233,9 +258,9 @@ option:checked{
   width: 250px;
   /* overflow: hidden; */
   border-radius: 5px;
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   transition: scale 0.3s;
-  box-shadow: 0 0 20px -15px black;
+  box-shadow: var(--shadow);
 
   &:hover{
     scale: 1.02;
@@ -251,7 +276,7 @@ option:checked{
 
 .country-card a{
   text-decoration: none;
-  color: var(--color-grey-50);
+  color: var(--text-main);
   display: block;
 }
 
@@ -271,7 +296,7 @@ option:checked{
   font-weight: 600;
 
   & span{
-    color: hsla(0, 0%, 99%, 80%);
+    color: var(--text-main);
     font-weight: 300;
   }
 }
@@ -284,13 +309,14 @@ option:checked{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   border: none;
   padding: 8px 1rem;
   border-radius: 2px;
-  color: var(--color-grey-50);
+  color: var(--text-main);
   font-size: 14px;
   cursor: pointer;
+  box-shadow: var(--shadow);
 }
 
 .details-section{
@@ -342,14 +368,14 @@ h3{
 }
 
 .country-btn{
-  background-color: var(--color-blue-900);
+  background-color: var(--bg-el);
   border: none;
   border-radius: 2px;
   padding: 5px 1rem;
   font-size: 12px;
-  color: var(--color-grey-50);
+  color: var(--text-main);
   cursor: pointer;
-  box-shadow: 0 0 20px -10px black;
+  box-shadow: var(--shadow);
   transition: scale 0.3s ease;
 
   &:hover{
