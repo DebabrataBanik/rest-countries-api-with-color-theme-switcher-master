@@ -58,24 +58,28 @@ const Main = () => {
         <CountryDetails countryList={data} setCurrentPath={setCurrentPath} />
         :
         <>
-          <div className="topbar-container">
-            <label className="country-label" htmlFor="country">
+          <form 
+            className="topbar-container"
+            role="search"
+            onSubmit={e => e.preventDefault()}
+          >
+            <label className="country-label">
+              <span className="sr-only">Search for a country</span>
               <input 
-                id="country"
                 type="text" 
                 name="country" 
                 placeholder="Search for a country..."
                 value={inputSearch}
                 onChange={e => setInputSearch(e.target.value)}
               />
-              <SearchIcon size={17} className="search-icon" />
+              <SearchIcon size={17} className="search-icon" aria-hidden="true" />
             </label>
 
             <div className="filter-container">
-              <label className="filter-label" htmlFor="filter">
+              <label className="filter-label">
+                <span className="sr-only">Filter by Region</span>
                 <select 
-                  name="filter" 
-                  id="filter"
+                  name="filter"
                   value={filterRegion}
                   onChange={e => setFilterRegion(e.target.value)}
                   aria-label="Filter countries by region"
@@ -87,22 +91,26 @@ const Main = () => {
                   <option value="europe">Europe</option>
                   <option value="oceania">Oceania</option>
                 </select>
-                <ChevronDown size={15} className="down-icon" />
+                <ChevronDown size={15} className="down-icon" aria-hidden='true' />
               </label>
               { 
                 filterRegion &&
                 <p className="clear"> 
-                  <button onClick={clearFilter}> 
-                  Clear filter
+                  <button type="button" onClick={clearFilter}> 
+                    Clear filter
                   </button>
                 </p>
               } 
             </div>
-          </div>
+          </form>
           
           
-          <section className="country-list-wrapper">
-            {error && <p className="error-state">{error}</p>}
+          <section 
+            className="country-list-wrapper"
+            aria-label="Country Results"
+          >
+            <h2 className="sr-only">Country List</h2>
+            {error && <p className="error-state" role="alert">{error}</p>}
 
             {!error && loading && <p className="loading-state">Loading countries...</p>}
 

@@ -9,7 +9,7 @@ const Header = () => {
     <header>
       <h1>Where in the world?</h1>
 
-      <button onClick={toggleTheme} className="toggle">
+      <button type="button" onClick={toggleTheme} className="toggle">
         <Moon size={13} className={darkMode ? 'filled' : ''} />
         Dark Mode
       </button>

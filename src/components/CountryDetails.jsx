@@ -50,7 +50,7 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
 
   return (
     <div className="country-details-container">
-      <button onClick={() => window.history.back()} className="back-btn">
+      <button type="button" onClick={() => window.history.back()} className="back-btn">
         <ArrowLeft size={15} />
         Back
       </button>
@@ -105,7 +105,8 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
             <div className="countries">
               {borderCountries.length > 0 ? (
                 borderCountries.map(border => (
-                  <button 
+                  <button
+                    type="button"
                     key={border.cca3} 
                     className="country-btn"
                     onClick={() => handleClick(border.cca3)}

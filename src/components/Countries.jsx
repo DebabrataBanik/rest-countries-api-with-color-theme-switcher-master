@@ -32,7 +32,7 @@ const Countries = ({data, setCurrentPath}) => {
                   loading="lazy"
                 />
                 <div className="country-info">
-                  <h2>{name}</h2>
+                  <h3>{name}</h3>
                   <p>Population: <span>{population}</span></p>
                   <p>Region: <span>{region}</span></p>
                   <p>Capital: <span>{capital}</span></p>
