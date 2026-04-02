@@ -72,7 +72,7 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
                 <span>{nativeName}</span>
               </strong>
               <strong>Population: 
-                <span>{data.population?.toLocaleString('eng-US')}</span>
+                <span>{data.population?.toLocaleString('en-US')}</span>
               </strong>
               <strong>Region: 
                 <span>{data.region}</span>

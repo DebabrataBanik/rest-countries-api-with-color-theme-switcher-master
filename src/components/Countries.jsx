@@ -3,7 +3,7 @@ const Countries = ({countries, setCurrentPath}) => {
   function handleClick(e, id){
     e.preventDefault()
     setCurrentPath(`/country/${id}`)
-    window.history.pushState({}, '', `country/${id}`)
+    window.history.pushState({}, '', `/country/${id}`)
   }
 
   return (

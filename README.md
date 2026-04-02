@@ -12,7 +12,6 @@ This is a solution to the [REST Countries API with color theme switcher challeng
   - [Built with](#built-with)
   - [What I learned](#what-i-learned)
   - [Continued development](#continued-development)
-  - [AI Collaboration](#ai-collaboration)
 - [Author](#author)
 
 ## Overview
@@ -34,7 +33,7 @@ Users should be able to:
 
 ### Links
 
-<!-- - Solution URL: [Add solution URL here](https://your-solution-url.com) -->
+- [Solution URL](https://www.frontendmentor.io/solutions/rest-countries-api-with-color-theme-switcher-master-Mq9CU-egwp)
 
 - [Live Site URL](https://rest-countries-api-with-color-theme-amber.vercel.app/)
 
