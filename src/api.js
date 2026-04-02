@@ -19,3 +19,14 @@ export async function getCountryDetails(id){
   const data = await res.json()
   return data
 } 
+
+export async function getBorderingCountryDetails(borderCodesArr){
+  if (!borderCodesArr.length) return []
+  const url = `${api}/alpha?codes=${borderCodesArr.join(',')}`
+  const res = await fetch(url)
+  if(!res.ok){
+    throw new Error(`${res.status} - ${res.statusText}`)
+  }
+  const data = await res.json()
+  return data
+}

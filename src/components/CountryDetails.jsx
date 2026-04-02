@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react"
-import { getCountryDetails } from "../api"
+import { getBorderingCountryDetails, getCountryDetails } from "../api"
 import { ArrowLeft } from "lucide-react"
 
-const CountryDetails = ({countryList, setCurrentPath}) => {
+const CountryDetails = ({setCurrentPath}) => {
 
   const [data, setData] = useState([])
+  const [borderingCountries, setBorderingCountries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
 
@@ -16,8 +17,11 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
       setLoading(true)
       setError('')
       try {
-        const data = await getCountryDetails(id)
-        setData(data[0])
+        const resData = await getCountryDetails(id)
+        const borderCodes = resData[0].borders || []
+        const moreResData = await getBorderingCountryDetails(borderCodes)
+        setData(resData[0])
+        setBorderingCountries(moreResData)
       } catch (error) {
         setError(error.message)
       } finally{
@@ -34,11 +38,6 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
 
   if(error) return <p className="error-state">{error}</p>
   if(loading) return <p className="loading-state">Loading country details...</p>
-
-  const borderCodes = data.borders || []; 
-  const borderCountries = countryList.filter(item => 
-    borderCodes.includes(item.cca3)
-  );
 
   const name = data.name?.common || 'N/A'
   const nativeName = data.name?.nativeName 
@@ -103,8 +102,8 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
           <div className="border-countries-container">
             <h3>Border Countries:</h3>
             <div className="countries">
-              {borderCountries.length > 0 ? (
-                borderCountries.map(border => (
+              {borderingCountries.length > 0 ? (
+                borderingCountries.map(border => (
                   <button
                     type="button"
                     key={border.cca3} 

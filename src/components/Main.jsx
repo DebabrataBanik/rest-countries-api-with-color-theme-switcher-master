@@ -55,7 +55,7 @@ const Main = () => {
       {
         currentPath.includes('country') 
         ?
-        <CountryDetails countryList={countries} setCurrentPath={setCurrentPath} />
+        <CountryDetails setCurrentPath={setCurrentPath} />
         :
         <>
           <form 
