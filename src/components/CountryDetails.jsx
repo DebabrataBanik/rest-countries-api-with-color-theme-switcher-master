@@ -56,7 +56,12 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
       </button>
 
       <section className="info-container">
-        <img src={data.flags.svg} alt={data.flags.alt || `Flag of ${name}`} />
+        <img 
+          src={data.flags.svg} 
+          alt={data.flags.alt || `Flag of ${name}`} 
+          width={500}
+          height={333}
+        />
 
         <div className="details-section">
           <h2>{name}</h2>

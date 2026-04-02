@@ -339,8 +339,10 @@ option:checked{
 }
 
 .info-container img{
+  width: 100%;
   aspect-ratio: 3/2;
   max-width: 500px;
+  display: block;
 }
 
 .details-section{
