@@ -58,44 +58,46 @@ const Main = () => {
         <CountryDetails countryList={data} setCurrentPath={setCurrentPath} />
         :
         <>
-          <label className="country-label" htmlFor="country">
-            <input 
-              id="country"
-              type="text" 
-              name="country" 
-              placeholder="Search for a country..."
-              value={inputSearch}
-              onChange={e => setInputSearch(e.target.value)}
-            />
-            <SearchIcon size={17} className="search-icon" />
-          </label>
-
-          <div>
-            <label className="filter-label" htmlFor="filter">
-              <select 
-                name="filter" 
-                id="filter"
-                value={filterRegion}
-                onChange={e => setFilterRegion(e.target.value)}
-                aria-label="Filter countries by region"
-              >
-                <option value='' disabled hidden>Filter by Region</option>
-                <option value="africa">Africa</option>
-                <option value="america">America</option>
-                <option value="asia">Asia</option>
-                <option value="europe">Europe</option>
-                <option value="oceania">Oceania</option>
-              </select>
-              <ChevronDown size={15} className="down-icon" />
+          <div className="topbar-container">
+            <label className="country-label" htmlFor="country">
+              <input 
+                id="country"
+                type="text" 
+                name="country" 
+                placeholder="Search for a country..."
+                value={inputSearch}
+                onChange={e => setInputSearch(e.target.value)}
+              />
+              <SearchIcon size={17} className="search-icon" />
             </label>
-            { 
-              filterRegion &&
-              <p className="clear"> 
-                <button onClick={clearFilter}> 
-                Clear filter
-                </button>
-              </p>
-            } 
+
+            <div>
+              <label className="filter-label" htmlFor="filter">
+                <select 
+                  name="filter" 
+                  id="filter"
+                  value={filterRegion}
+                  onChange={e => setFilterRegion(e.target.value)}
+                  aria-label="Filter countries by region"
+                >
+                  <option value='' disabled hidden>Filter by Region</option>
+                  <option value="africa">Africa</option>
+                  <option value="america">America</option>
+                  <option value="asia">Asia</option>
+                  <option value="europe">Europe</option>
+                  <option value="oceania">Oceania</option>
+                </select>
+                <ChevronDown size={15} className="down-icon" />
+              </label>
+              { 
+                filterRegion &&
+                <p className="clear"> 
+                  <button onClick={clearFilter}> 
+                  Clear filter
+                  </button>
+                </p>
+              } 
+            </div>
           </div>
           
           

@@ -113,9 +113,14 @@ main{
   padding: 1rem;
 }
 
+.topbar-container{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .country-label{
   display: block;
-  margin-bottom: 2rem;
   position: relative;
 }
 
@@ -185,7 +190,7 @@ select::picker-icon{
 select{
   cursor: pointer;
   width: 12rem;
-  padding: 0.8rem 1.5rem;
+  padding: 1rem 1.5rem;
   background-color: var(--bg-el);
   border: none;
   color: var(--text-main);
@@ -270,8 +275,7 @@ option:checked{
 }
 
 .country-card img{
-  max-height: 150px;
-  /* aspect-ratio: 1; */
+  aspect-ratio: 5/3;
   object-fit: cover;
   border-radius: 5px 5px 0 0;
 }
@@ -382,5 +386,66 @@ h3{
 
   &:hover{
     scale: 1.02;
+  }
+}
+
+@media (min-width: 600px){
+
+  .topbar-container{
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .country-label{
+    width: 50%;
+    max-width: 500px;
+  }
+
+  .list-container{
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, 275px);
+    gap: 4rem;
+  }
+
+  .country-card{
+    width: 275px;
+  }
+}
+
+@media (min-width: 1400px){
+
+  header h1{
+    font-size: 18px;
+  }
+
+  .toggle{
+    font-size: 16px;
+    gap: 1rem;
+  }
+
+  .country-label{
+    font-size: 16px;
+  }
+
+  input{
+    padding-block: 1rem;
+  }
+  input::placeholder{
+    font-size: 16px;
+  }
+
+  select{
+    width: 15rem;
+    padding: 1rem 2rem;
+    font-size: 14px;
+  }
+
+  header{
+    padding-inline: 7rem;
+  }
+
+  main{
+    padding-inline: 4rem;
   }
 }

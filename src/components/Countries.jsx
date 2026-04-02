@@ -27,8 +27,6 @@ const Countries = ({data, setCurrentPath}) => {
                 <img 
                   src={imageSrc}
                   alt={alt} 
-                  width={250} 
-                  height={150} 
                   loading="lazy"
                 />
                 <div className="country-info">
