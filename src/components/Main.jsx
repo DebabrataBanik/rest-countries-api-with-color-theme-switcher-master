@@ -71,7 +71,7 @@ const Main = () => {
               <SearchIcon size={17} className="search-icon" />
             </label>
 
-            <div>
+            <div className="filter-container">
               <label className="filter-label" htmlFor="filter">
                 <select 
                   name="filter" 

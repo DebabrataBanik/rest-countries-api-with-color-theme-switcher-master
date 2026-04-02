@@ -149,13 +149,18 @@ input{
   opacity: 0.5;
 }
 
+.filter-container{
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .filter-label{
   position: relative;
 }
 
 .clear{
   display: inline-block;
-  margin-left: 1rem;
 
   & button{
     background-color: transparent;
@@ -325,7 +330,7 @@ option:checked{
   box-shadow: var(--shadow);
 }
 
-.details-section{
+.info-container{
   margin-top: 2rem;
   font-size: 14px;
   display: flex;
@@ -333,15 +338,27 @@ option:checked{
   gap: 1rem;
 }
 
-.details-section img{
+.info-container img{
   aspect-ratio: 3/2;
   max-width: 500px;
+}
+
+.details-section{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .details-section h2{
   font-size: 20px;
   font-weight: 800;
   margin-top: 1rem;
+}
+
+.details{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 .top-details strong{
@@ -401,6 +418,10 @@ h3{
     max-width: 500px;
   }
 
+  .filter-container{
+    flex-direction: row-reverse;
+  }
+
   .list-container{
     display: grid;
     width: 100%;
@@ -410,6 +431,50 @@ h3{
 
   .country-card{
     width: 275px;
+  }
+}
+
+@media (min-width: 1000px){
+
+  header{
+    padding-inline: 4rem;
+  }
+
+  main{
+    padding-inline: 4rem;
+  }
+
+  .back-btn{
+    margin-block: 1rem 3rem;
+  }
+
+  .info-container{
+    flex-direction: row;
+    align-items: center;
+    gap: 5rem;
+    font-size: 16px;
+  }
+  
+  .info-container img{
+    width: 45%;
+    max-width: 800px;
+  }
+
+  .details-section h2{
+    font-size: 30px;
+  }
+
+  .details{
+    flex-direction: row;
+    gap: 5rem;
+  }
+
+  h3{
+    font-size: 16px;
+  }
+
+  .country-btn{
+    font-size: 14px;
   }
 }
 
@@ -441,11 +506,7 @@ h3{
     font-size: 14px;
   }
 
-  header{
-    padding-inline: 7rem;
-  }
 
-  main{
-    padding-inline: 4rem;
-  }
+
+
 }

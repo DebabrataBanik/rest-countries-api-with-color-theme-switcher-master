@@ -55,59 +55,63 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
         Back
       </button>
 
-      <section className="details-section">
+      <section className="info-container">
         <img src={data.flags.svg} alt={data.flags.alt || `Flag of ${name}`} />
 
-        <h2>{name}</h2>
+        <div className="details-section">
+          <h2>{name}</h2>
 
-        <div className="top-details">
-          <strong>Native Name: 
-            <span>{nativeName}</span>
-          </strong>
-          <strong>Population: 
-            <span>{data.population?.toLocaleString('eng-US')}</span>
-          </strong>
-          <strong>Region: 
-            <span>{data.region}</span>
-          </strong>
-          <strong>Sub Region: 
-            <span>{data.subregion}</span>
-          </strong>
-          <strong>Capital: 
-            <span>{data.capital?.join(', ') || 'N/A'}</span>
-          </strong>
-        </div>
+          <div className="details">
+            <div className="top-details">
+              <strong>Native Name: 
+                <span>{nativeName}</span>
+              </strong>
+              <strong>Population: 
+                <span>{data.population?.toLocaleString('eng-US')}</span>
+              </strong>
+              <strong>Region: 
+                <span>{data.region}</span>
+              </strong>
+              <strong>Sub Region: 
+                <span>{data.subregion}</span>
+              </strong>
+              <strong>Capital: 
+                <span>{data.capital?.join(', ') || 'N/A'}</span>
+              </strong>
+            </div>
 
-        <div className="bottom-details">
-          <strong>Top Level Domain: 
-            <span>{tld}</span>
-          </strong>
-          <strong>Currencies: 
-            <span>
-              {currencies}
-            </span>
-          </strong>
-          <strong>Languages: 
-            <span>{languages}</span>
-          </strong>
-        </div>
+            <div className="bottom-details">
+              <strong>Top Level Domain: 
+                <span>{tld}</span>
+              </strong>
+              <strong>Currencies: 
+                <span>
+                  {currencies}
+                </span>
+              </strong>
+              <strong>Languages: 
+                <span>{languages}</span>
+              </strong>
+            </div>
+          </div>
 
-        <div className="border-countries-container">
-          <h3>Border Countries:</h3>
-          <div className="countries">
-            {borderCountries.length > 0 ? (
-              borderCountries.map(border => (
-                <button 
-                  key={border.cca3} 
-                  className="country-btn"
-                  onClick={() => handleClick(border.cca3)}
-                >
-                  {border.name.common}
-                </button>
-              ))
-            ) : (
-              <span>No bordering countries</span>
-            )}
+          <div className="border-countries-container">
+            <h3>Border Countries:</h3>
+            <div className="countries">
+              {borderCountries.length > 0 ? (
+                borderCountries.map(border => (
+                  <button 
+                    key={border.cca3} 
+                    className="country-btn"
+                    onClick={() => handleClick(border.cca3)}
+                  >
+                    {border.name.common}
+                  </button>
+                ))
+              ) : (
+                <span>No bordering countries</span>
+              )}
+            </div>
           </div>
         </div>
 
