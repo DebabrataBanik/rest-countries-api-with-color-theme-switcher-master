@@ -11,7 +11,7 @@ const Main = () => {
 
   const [inputSearch, setInputSearch] = useState('')
   const [filterRegion, setFilterRegion] = useState('')
-  const [data, setData] = useState([])
+  const [countries, setCountries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
   const [currentPath, setCurrentPath] = useState(window.location.pathname)
@@ -24,7 +24,7 @@ const Main = () => {
       try {
         const data = await getRestCountries()
         const sortedData = getSortedData(data)
-        setData(sortedData)
+        setCountries(sortedData)
       } catch (error) {
         setError(error.message)
       } finally{
@@ -47,7 +47,7 @@ const Main = () => {
     setFilterRegion('')
   }
 
-  const displayCountriesData = getFilterandSearchData(data, filterRegion, inputSearch)
+  const displayCountriesData = getFilterandSearchData(countries, filterRegion, inputSearch)
 
   return (
     <main>
@@ -55,7 +55,7 @@ const Main = () => {
       {
         currentPath.includes('country') 
         ?
-        <CountryDetails countryList={data} setCurrentPath={setCurrentPath} />
+        <CountryDetails countryList={countries} setCurrentPath={setCurrentPath} />
         :
         <>
           <form 
@@ -117,7 +117,7 @@ const Main = () => {
             {
               !error && !loading && (
                 displayCountriesData.length > 0 ?
-                <Countries setCurrentPath={setCurrentPath} data={displayCountriesData} />
+                <Countries setCurrentPath={setCurrentPath} countries={displayCountriesData} />
                 :
                 <p className="empty-state">No countries found.</p>
               )

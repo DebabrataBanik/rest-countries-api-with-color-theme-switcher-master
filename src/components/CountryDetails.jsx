@@ -29,7 +29,7 @@ const CountryDetails = ({countryList, setCurrentPath}) => {
 
   function handleClick(id){
     setCurrentPath(`/country/${id}`)
-    window.history.pushState({}, '', id)
+    window.history.pushState({}, '', `/country/${id}`)
   }
 
   if(error) return <p className="error-state">{error}</p>

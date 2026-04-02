@@ -1,4 +1,4 @@
-const Countries = ({data, setCurrentPath}) => {
+const Countries = ({countries, setCurrentPath}) => {
 
   function handleClick(e, id){
     e.preventDefault()
@@ -9,7 +9,7 @@ const Countries = ({data, setCurrentPath}) => {
   return (
     <div className="list-container">
       {
-        data.map(item => {
+        countries.map(item => {
           const id = item.cca3
           const name = item.name?.common || 'N/A'
           const capital = item.capital?.[0] || 'N/A'

@@ -1,6 +1,6 @@
 export default function getSortedData(data){
   
-  return data.sort((a, b) => {
+  return [...data].sort((a, b) => {
     const name1 = a.name.common
     const name2 = b.name.common
 
