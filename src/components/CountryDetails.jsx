@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react"
 import { getBorderingCountryDetails, getCountryDetails } from "../api"
 import { ArrowLeft } from "lucide-react"
+import useNavigation from "../hooks/useNavigation"
 
-const CountryDetails = ({setCurrentPath}) => {
+const CountryDetails = () => {
 
   const [data, setData] = useState([])
   const [borderingCountries, setBorderingCountries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
+  const { navigate } = useNavigation()
 
   const path = window.location.pathname
   const id = path.split('/').pop()
@@ -32,8 +34,7 @@ const CountryDetails = ({setCurrentPath}) => {
   }, [id])
 
   function handleClick(id){
-    setCurrentPath(`/country/${id}`)
-    window.history.pushState({}, '', `/country/${id}`)
+    navigate(`/country/${id}`)
   }
 
   if(error) return <p className="error-state">{error}</p>

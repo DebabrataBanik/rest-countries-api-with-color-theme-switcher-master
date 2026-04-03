@@ -1,9 +1,12 @@
-const Countries = ({countries, setCurrentPath}) => {
+import useNavigation from "../hooks/useNavigation"
+
+const Countries = ({countries}) => {
+
+  const { navigate } = useNavigation()
 
   function handleClick(e, id){
     e.preventDefault()
-    setCurrentPath(`/country/${id}`)
-    window.history.pushState({}, '', `/country/${id}`)
+    navigate(`/country/${id}`)
   }
 
   return (

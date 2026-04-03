@@ -6,6 +6,7 @@ import Countries from "./Countries";
 import CountryDetails from "./CountryDetails";
 import getSortedData from "../util/getSortedData";
 import getFilterandSearchData from "../util/getFilterandSearchData";
+import useNavigation from "../hooks/useNavigation";
 
 const Main = () => {
 
@@ -14,7 +15,7 @@ const Main = () => {
   const [countries, setCountries] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const { currentPath } = useNavigation()
 
   useEffect(() => {
     
@@ -34,14 +35,6 @@ const Main = () => {
     fetchData()
   }, [])
 
-  useEffect(() => {
-    const handlePathChange = () => {
-      setCurrentPath(window.location.pathname)
-    }
-
-    window.addEventListener('popstate', handlePathChange)
-    return () => window.removeEventListener('popstate', handlePathChange)
-  }, [])
 
   function clearFilter(){
     setFilterRegion('')
@@ -55,7 +48,7 @@ const Main = () => {
       {
         currentPath.includes('country') 
         ?
-        <CountryDetails setCurrentPath={setCurrentPath} />
+        <CountryDetails />
         :
         <>
           <form 
@@ -117,7 +110,7 @@ const Main = () => {
             {
               !error && !loading && (
                 displayCountriesData.length > 0 ?
-                <Countries setCurrentPath={setCurrentPath} countries={displayCountriesData} />
+                <Countries countries={displayCountriesData} />
                 :
                 <p className="empty-state">No countries found.</p>
               )
