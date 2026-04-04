@@ -7,6 +7,7 @@ import CountryDetails from "./CountryDetails";
 import getSortedData from "../util/getSortedData";
 import getFilterandSearchData from "../util/getFilterandSearchData";
 import useNavigation from "../hooks/useNavigation";
+import CountriesSkeleton from "./skeletons/CountriesSkeleton";
 
 const Main = () => {
 
@@ -101,11 +102,18 @@ const Main = () => {
           <section 
             className="country-list-wrapper"
             aria-label="Country Results"
+            aria-busy={loading}
           >
             <h2 className="sr-only">Country List</h2>
             {error && <p className="error-state" role="alert">{error}</p>}
 
-            {!error && loading && <p className="loading-state">Loading countries...</p>}
+            {!error && loading && (
+              <>
+                <CountriesSkeleton />
+                <span className="sr-only" role="status">Loading countries...</span>
+              </>
+            )
+            }
 
             {
               !error && !loading && (

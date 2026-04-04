@@ -263,6 +263,7 @@ option:checked{
 }
 
 .loading-state, .error-state, .empty-state{
+  text-align: center;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -423,6 +424,7 @@ h3{
 @media (min-width: 600px){
 
   .topbar-container{
+    margin-block: 2rem;
     flex-direction: row;
     justify-content: space-between;
   }
@@ -519,8 +521,27 @@ h3{
     padding: 1rem 2rem;
     font-size: 14px;
   }
+}
 
+/* skeleton UI */
 
+.skeleton .country-card{
+  overflow: hidden;
+  height: 20.325rem;
+}
 
+.skeleton .img-container{
+  aspect-ratio: 5/3;
+  background-color: #00000010;
+}
 
+/* animation */
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 100% 0;
+  }
 }
