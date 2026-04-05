@@ -1,47 +1,30 @@
 import { useEffect, useState } from "react";
 import { SearchIcon } from "lucide-react";
 import { ChevronDown } from "lucide-react";
-import { getRestCountries } from "../api";
+import { getRestCountries } from "../services/api";
 import Countries from "./Countries";
 import CountryDetails from "./CountryDetails";
 import getSortedData from "../util/getSortedData";
 import getFilterandSearchData from "../util/getFilterandSearchData";
 import useNavigation from "../hooks/useNavigation";
 import CountriesSkeleton from "./skeletons/CountriesSkeleton";
+import { useQuery } from "@tanstack/react-query";
 
 const Main = () => {
 
   const [inputSearch, setInputSearch] = useState('')
   const [filterRegion, setFilterRegion] = useState('')
-  const [countries, setCountries] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
   const { currentPath } = useNavigation()
 
-  useEffect(() => {
-    
-    async function fetchData(){
-      setLoading(true)
-      setError('')
-      try {
-        const data = await getRestCountries()
-        const sortedData = getSortedData(data)
-        setCountries(sortedData)
-      } catch (error) {
-        setError(error.message)
-      } finally{
-        setLoading(false)
-      }
-    }
-    fetchData()
-  }, [])
+  const { data: countries = [], isLoading, error } = useQuery({
+    queryKey: ['countries'], 
+    queryFn: async () => {
+      const data = await getRestCountries()
+      return getSortedData(data)
+    } 
+  })
 
-
-  function clearFilter(){
-    setFilterRegion('')
-  }
-
-  const displayCountriesData = getFilterandSearchData(countries, filterRegion, inputSearch)
+  const displayData = getFilterandSearchData(countries, filterRegion, inputSearch)
 
   return (
     <main>
@@ -90,7 +73,10 @@ const Main = () => {
               { 
                 filterRegion &&
                 <p className="clear"> 
-                  <button type="button" onClick={clearFilter}> 
+                  <button 
+                    type="button" 
+                    onClick={() => setFilterRegion('')}
+                  > 
                     Clear filter
                   </button>
                 </p>
@@ -102,23 +88,22 @@ const Main = () => {
           <section 
             className="country-list-wrapper"
             aria-label="Country Results"
-            aria-busy={loading}
+            aria-busy={isLoading}
           >
             <h2 className="sr-only">Country List</h2>
-            {error && <p className="error-state" role="alert">{error}</p>}
+            {error && <p className="error-state" role="alert">{error.message}</p>}
 
-            {!error && loading && (
+            {!error && isLoading && (
               <>
                 <CountriesSkeleton />
                 <span className="sr-only" role="status">Loading countries...</span>
               </>
-            )
-            }
+            )}
 
             {
-              !error && !loading && (
-                displayCountriesData.length > 0 ?
-                <Countries countries={displayCountriesData} />
+              !error && !isLoading && (
+                displayData.length > 0 ?
+                <Countries countries={displayData} />
                 :
                 <p className="empty-state">No countries found.</p>
               )

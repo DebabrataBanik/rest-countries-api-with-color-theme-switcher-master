@@ -1,44 +1,37 @@
-import { useState, useEffect } from "react"
-import { getBorderingCountryDetails, getCountryDetails } from "../api"
+import { getBorderingCountryDetails, getCountryDetails } from "../services/api"
 import { ArrowLeft } from "lucide-react"
 import useNavigation from "../hooks/useNavigation"
+import { useQuery } from "@tanstack/react-query";
 
 const CountryDetails = () => {
 
-  const [data, setData] = useState([])
-  const [borderingCountries, setBorderingCountries] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState('')
   const { navigate } = useNavigation()
 
   const path = window.location.pathname
   const id = path.split('/').pop()
 
-  useEffect(() => {
-    async function fetchData(){
-      setLoading(true)
-      setError('')
-      try {
-        const resData = await getCountryDetails(id)
-        const borderCodes = resData[0].borders || []
-        const moreResData = await getBorderingCountryDetails(borderCodes)
-        setData(resData[0])
-        setBorderingCountries(moreResData)
-      } catch (error) {
-        setError(error.message)
-      } finally{
-        setLoading(false)
-      }
+  const { data, isLoading, error} = useQuery({
+    queryKey: ['country', id],
+    queryFn: async () => {
+      const res = await getCountryDetails(id)
+      return res[0]
     }
-    fetchData()
-  }, [id])
+  })
+
+  const borderCodes = data?.borders || []
+
+  const { data: borderingCountries = [], isLoading: bordersLoading } = useQuery({
+    queryKey: ['borders', id],
+    queryFn: () => getBorderingCountryDetails(borderCodes),
+    enabled: borderCodes.length > 0
+  })
 
   function handleClick(id){
     navigate(`/country/${id}`)
   }
 
-  if(error) return <p className="error-state">{error}</p>
-  if(loading) return <p className="loading-state">Loading country details...</p>
+  if(error) return <p className="error-state">{error.message}</p>
+  if(isLoading) return <p className="loading-state">Loading country details...</p>
 
   const name = data.name?.common || 'N/A'
   const nativeName = data.name?.nativeName 
@@ -57,8 +50,8 @@ const CountryDetails = () => {
 
       <section className="info-container">
         <img 
-          src={data.flags.svg} 
-          alt={data.flags.alt || `Flag of ${name}`} 
+          src={data?.flags?.svg} 
+          alt={data?.flags?.alt || `Flag of ${name}`} 
           width={500}
           height={333}
         />
@@ -103,7 +96,13 @@ const CountryDetails = () => {
           <div className="border-countries-container">
             <h3>Border Countries:</h3>
             <div className="countries">
-              {borderingCountries.length > 0 ? (
+
+              {
+                bordersLoading ? 
+                ( 
+                  <span>Loading...</span> 
+                ) :
+                borderingCountries.length > 0 ? (
                 borderingCountries.map(border => (
                   <button
                     type="button"
